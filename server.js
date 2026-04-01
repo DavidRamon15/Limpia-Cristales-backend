@@ -1,7 +1,7 @@
 require('dotenv').config();
 const express = require('express');
 const app = express();
-const PORT = 3000; // Puerto en el que correrá el servidor
+const PORT = process.env.PORT || 3000;
 
 // Middleware para manejar JSON
 app.use(express.json());
