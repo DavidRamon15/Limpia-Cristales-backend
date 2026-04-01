@@ -1,13 +1,22 @@
 require('dotenv').config();
 const express = require('express');
+const cors = require('cors');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Middleware para manejar JSON
-app.use(express.json());
+const corsOptions = {
+    origin: [
+        'https://www.cristalerodealmeria.com',
+        'https://cristalerodealmeria.com',
+        'http://localhost:4200'
+    ],
+    methods: ['GET', 'POST', 'OPTIONS'],
+    allowedHeaders: ['Content-Type']
+};
 
-const cors = require('cors');
-app.use(cors());
+app.use(cors(corsOptions));
+app.options('*', cors(corsOptions));
+app.use(express.json());
 // Ruta principal (GET)
 app.get('/', (req, res) => {
     res.send('¡Hola, este es tu backend con Node.js!');
